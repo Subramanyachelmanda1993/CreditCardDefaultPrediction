@@ -6,4 +6,3 @@ numpy
 PyYAML
 evidently
 dill
-ipykernel
