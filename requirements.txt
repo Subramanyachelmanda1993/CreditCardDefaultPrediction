@@ -7,3 +7,5 @@ PyYAML
 evidently
 dill
 -e .
+re
+typing
