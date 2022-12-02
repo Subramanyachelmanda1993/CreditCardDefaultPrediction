@@ -1,11 +1,11 @@
 import os
 import sys
 
-class CreditCradDefaultException(Exception):
+class CreditCardDefaultException(Exception):
 
     def __init__(self, error_message:Exception, error_detail:sys):
         super().__init__(error_message)
-        self.error_message=CreditCradDefaultException.get_detailed_error_message(error_message=error_message,
+        self.error_message=CreditCardDefaultException.get_detailed_error_message(error_message=error_message,
                                                                     error_detail=error_detail
                                                                     )
 
