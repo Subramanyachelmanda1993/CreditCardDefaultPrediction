@@ -10,8 +10,8 @@ def index():
     try:
         raise Exception("testing custom exception")
     except Exception as e:
-        default=CreditCardDefault(e,sys)
-        logging.info(creditcarddefault.error_message)
+        default=CreditCardDefaultException(e,sys)
+        logging.info(CreditCardDefaultException.error_message)
         logging.info("testing logging module")
         return "Starting Ineuron's Intership Project"
   
