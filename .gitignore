@@ -28,6 +28,7 @@ share/python-wheels/
 MANIFEST
 creditcarddefaultprediction/
 notebook/
+demo.py
 
 
 # PyInstaller
