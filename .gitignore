@@ -27,6 +27,8 @@ share/python-wheels/
 *.egg
 MANIFEST
 creditcarddefaultprediction/
+notebook/
+
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
