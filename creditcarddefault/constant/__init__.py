@@ -12,10 +12,7 @@ CONFIG_FILE_NAME = "config.yaml"
 CONFIG_FILE_PATH = os.path.join(ROOT_DIR,CONFIG_DIR,CONFIG_FILE_NAME)
 
 
-
 CURRENT_TIME_STAMP = get_current_time_stamp()
-
-
 
 
 # # Training pipeline related variable
@@ -35,6 +32,7 @@ CURRENT_TIME_STAMP = get_current_time_stamp()
 # DATA_INGESTION_TRAIN_DIR_KEY = "ingested_train_dir"
 # DATA_INGESTION_TEST_DIR_KEY = "ingested_test_dir"
 
+
 # # Data Validation related variable
 
 # # Data Validation related variables
@@ -46,8 +44,8 @@ CURRENT_TIME_STAMP = get_current_time_stamp()
 # DATA_VALIDATION_REPORT_PAGE_FILE_NAME_KEY = "report_page_file_name"
 
 
-
 # # Data Transformation related variables
+
 # DATA_TRANSFORMATION_ARTIFACT_DIR = "data_transformation"
 # DATA_TRANSFORMATION_CONFIG_KEY = "data_transformation_config"
 # DATA_TRANSFORMATION_ADD_BEDROOM_PER_ROOM_KEY = "add_bedroom_per_room"
