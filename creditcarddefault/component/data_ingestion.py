@@ -18,7 +18,7 @@ class DataIngestion:
         except Exception as e:
             raise CreditCardDefaultException(e,sys)
 
-    def download_housing_data(self) -> str:
+    def download_creditcarddefault_data(self) -> str:
         try:
             #extracting remote url to download dataset
             download_url = self.data_ingestion_config.dataset_download_url
@@ -123,7 +123,7 @@ class DataIngestion:
     
     def initiate_data_ingestion(self)-> DataIngestionArtifact:
         try:
-            tgz_file_path =  self.download_housing_data()
+            tgz_file_path =  self.download_creditcarddefault_data()
             self.extract_tgz_file(tgz_file_path=tgz_file_path)
             return self.split_data_as_train_test()
         except Exception as e:
