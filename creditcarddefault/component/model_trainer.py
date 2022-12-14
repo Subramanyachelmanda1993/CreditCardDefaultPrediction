@@ -1,12 +1,12 @@
-from housing.exception import HousingException
+from creditcarddefault.exception import CreditCardDefaultException
 import sys
-from housing.logger import logging
+from creditcarddefault.logger import logging
 from typing import List
-from housing.entity.artifact_entity import DataTransformationArtifact, ModelTrainerArtifact
-from housing.entity.config_entity import ModelTrainerConfig
-from housing.util.util import load_numpy_array_data,save_object,load_object
-from housing.entity.model_factory import MetricInfoArtifact, ModelFactory,GridSearchedBestModel
-from housing.entity.model_factory import evaluate_regression_model
+from creditcarddefault.entity.artifact_entity import DataTransformationArtifact, ModelTrainerArtifact
+from creditcarddefault.entity.config_entity import ModelTrainerConfig
+from creditcarddefault.util.util import load_numpy_array_data,save_object,load_object
+# from creditcarddefault.entity.model_factory import MetricInfoArtifact, ModelFactory,GridSearchedBestModel
+# from creditcarddefault.entity.model_factory import evaluate_regression_model
 
 
 

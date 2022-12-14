@@ -1,6 +1,6 @@
 import os,sys
-from housing.exception import HousingException
-from housing.util.util import load_object
+from creditcarddefault.exception import CreditCardDefaultException
+from creditcarddefault.util.util import load_object
 
 import pandas as pd
 

@@ -1,9 +1,9 @@
 from cgi import test
 from sklearn import preprocessing
-from housing.exception import HousingException
-from housing.logger import logging
-from housing.entity.config_entity import DataTransformationConfig 
-from housing.entity.artifact_entity import DataIngestionArtifact,\
+from creditcarddefault.exception import CreditCardDefaultException
+from creditcarddefault.logger import logging
+from creditcarddefault.entity.config_entity import DataTransformationConfig 
+from creditcarddefault.entity.artifact_entity import DataIngestionArtifact,\
 DataValidationArtifact,DataTransformationArtifact
 import sys,os
 import numpy as np
@@ -13,8 +13,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 import pandas as pd
-from housing.constant import *
-from housing.util.util import read_yaml_file,save_object,save_numpy_array_data,load_data
+from creditcarddefault.constant import *
+from creditcarddefault.util.util import read_yaml_file,save_object,save_numpy_array_data,load_data
 
 
 #   longitude: float

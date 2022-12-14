@@ -1,7 +1,7 @@
-from housing.logger import logging
-from housing.exception import HousingException
-from housing.entity.artifact_entity import ModelPusherArtifact, ModelEvaluationArtifact 
-from housing.entity.config_entity import ModelPusherConfig
+from creditcarddefault.logger import logging
+from creditcarddefault.exception import CreditCardDefaultException
+from creditcarddefault.entity.artifact_entity import ModelPusherArtifact, ModelEvaluationArtifact 
+from creditcarddefault.entity.config_entity import ModelPusherConfig
 import os, sys
 import shutil
 
