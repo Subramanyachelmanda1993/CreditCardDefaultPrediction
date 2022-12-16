@@ -75,8 +75,8 @@ class DataIngestion:
 
 
             logging.info(f"Reading csv file: [{creditcarddefault_file_path}]")
-            creditcarddefault_data_frame = pd.read_excel(creditcarddefault_file_path)
-
+            creditcarddefault_data_frame = pd.read_csv(creditcarddefault_file_path, encoding='utf-8')
+            
             # creditcarddefault_data_frame["income_cat"] = pd.cut(
             #     housing_data_frame["median_income"],
             #     bins=[0.0, 1.5, 3.0, 4.5, 6.0, np.inf],
@@ -90,9 +90,9 @@ class DataIngestion:
 
             split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
 
-            # for train_index,test_index in split.split(housing_data_frame, housing_data_frame["income_cat"]):
-            #     strat_train_set = housing_data_frame.loc[train_index].drop(["income_cat"],axis=1)
-            #     strat_test_set = housing_data_frame.loc[test_index].drop(["income_cat"],axis=1)
+            for train_index,test_index in split.split(creditcarddefault_data_frame, creditcarddefault_data_frame.drop(("default.payment.next.month"),axis=1)):
+                strat_train_set =  creditcarddefault_data_frame.loc[train_index]
+                strat_test_set =  creditcarddefault_data_frame.loc[test_index]
 
             train_file_path = os.path.join(self.data_ingestion_config.ingested_train_dir,
                                             file_name)
