@@ -24,7 +24,7 @@ class DataIngestion:
             download_url = self.data_ingestion_config.dataset_download_url
 
             #folder location to download file
-            tgz_download_dir = self.data_ingestion_config.csv_download_dir
+            tgz_download_dir = self.data_ingestion_config.tgz_download_dir
 
             if os.path.exists(tgz_download_dir):
                 os.remove(tgz_download_dir)
@@ -37,7 +37,7 @@ class DataIngestion:
 
             logging.info(f"Downloading file from :[{download_url}] into :[{tgz_file_path}]")
             urllib.request.urlretrieve(download_url, tgz_file_path)
-            logging.info(f"File :[{csv_file_path}] has been downloaded successfully.")
+            logging.info(f"File :[{tgz_file_path}] has been downloaded successfully.")
             return tgz_file_path
 
         except Exception as e:
