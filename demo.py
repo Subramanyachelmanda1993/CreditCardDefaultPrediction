@@ -17,7 +17,7 @@ def main():
         # data_ingestion_config = Configuration()
         # data_ingestion_config.get_data_ingestion_config()
         # print(data_ingestion_config)
-        # pipeline.start()
+        # # pipeline.start()
         # logging.info("main function execution completed.")
     except Exception as e:
         logging.error(f"{e}")
