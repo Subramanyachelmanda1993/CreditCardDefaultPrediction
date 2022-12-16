@@ -34,9 +34,9 @@ class Configuration:
             
             dataset_download_url = data_ingestion_info[DATA_INGESTION_DOWNLOAD_URL_KEY]
             
-            tgz_download_dir = os.path.join(
+            csv_download_dir = os.path.join(
                 data_ingestion_artifact_dir,
-                data_ingestion_info[DATA_INGESTION_TGZ_DOWNLOAD_DIR_KEY]
+                data_ingestion_info[DATA_INGESTION_CSV_DOWNLOAD_DIR_KEY]
             )
             raw_data_dir = os.path.join(data_ingestion_artifact_dir,
             data_ingestion_info[DATA_INGESTION_RAW_DATA_DIR_KEY]
@@ -58,7 +58,7 @@ class Configuration:
 
             data_ingestion_config=DataIngestionConfig(
                 dataset_download_url=dataset_download_url, 
-                tgz_download_dir=tgz_download_dir, 
+                csv_download_dir=csv_download_dir, 
                 raw_data_dir=raw_data_dir, 
                 ingested_train_dir=ingested_train_dir, 
                 ingested_test_dir=ingested_test_dir

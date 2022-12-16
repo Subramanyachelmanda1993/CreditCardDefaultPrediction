@@ -67,15 +67,15 @@ class DataIngestion:
 
     def split_data_as_train_test(self) -> DataIngestionArtifact:
         try:
-            raw_download_dir = self.data_ingestion_config.raw_download_dir
+            raw_data_dir = self.data_ingestion_config.raw_data_dir
 
-            file_name = os.listdir(raw_download_dir)[0]
+            file_name = os.listdir(raw_data_dir)[0]
             
-            creditcarddefault_file_path = os.path.join(raw_download_dir, file_name)
+            creditcarddefault_file_path = os.path.join(raw_data_dir, file_name)
 
 
             logging.info(f"Reading csv file: [{creditcarddefault_file_path}]")
-            creditcarddefault_data_frame = pd.read_csv(creditcarddefault_file_path)
+            creditcarddefault_data_frame = pd.read_excel(creditcarddefault_file_path)
 
             # creditcarddefault_data_frame["income_cat"] = pd.cut(
             #     housing_data_frame["median_income"],
@@ -126,8 +126,8 @@ class DataIngestion:
     
     def initiate_data_ingestion(self)-> DataIngestionArtifact:
         try:
-            tgz_file_path = self.download_creditcarddefault_data()
-            self.extract_tgz_file(tgz_file_path=tgz_file_path)
+            csv_file_path = self.download_creditcarddefault_data()
+            self.extract_csv_file(csv_file_path=csv_file_path)
             return self.split_data_as_train_test()
         except Exception as e:
             raise CreditCardDefaultException(e,sys) from e
