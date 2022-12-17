@@ -58,6 +58,7 @@ class DataIngestion:
             logging.info(f"Extracting tgz file: [{tgz_file_path}] into dir: [{raw_data_dir}]")
             with tarfile.open(tgz_file_path) as creditcarddefault_tgz_file_obj:
                 creditcarddefault_tgz_file_obj.extractall(path=raw_data_dir)
+                creditcarddefault_tgz_file_obj.close()
             logging.info(f"Extraction completed")
   
         except Exception as e:
