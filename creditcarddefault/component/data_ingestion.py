@@ -56,9 +56,8 @@ class DataIngestion:
             os.makedirs(raw_data_dir,exist_ok=True)
 
             logging.info(f"Extracting csv file: [{tgz_file_path}] into dir: [{raw_data_dir}]")
-            with open(tgz_file_path) as csv_file:
-                csv.reader(csv_file)
-            shutil.copy(tgz_file_path, raw_data_dir)
+            with tarfile.open(tgz_file_path) as creditcard_tgz_file_obj:
+                creditcard_tgz_file_obj.extractall(path=raw_data_dir)
             
             logging.info(f"Extraction completed")
   

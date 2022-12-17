@@ -3,7 +3,7 @@ training_pipeline_config:
   artifact_dir: artifact
 
 data_ingestion_config:
-  dataset_download_url: https://github.com/Subramanyachelmanda1993/CreditCardDefaultPrediction/blob/main/data/UCI_Credit_Card.txt
+  dataset_download_url: https://github.com/Subramanyachelmanda1993/CreditCardDefaultPrediction/blob/83609fe70e0e69fa9daa9710920d855d36763ad9/data/UCI_Credit_Card.gz
   raw_data_dir: raw_data
   tgz_download_dir: tgz_data
   ingested_dir: ingested_data
