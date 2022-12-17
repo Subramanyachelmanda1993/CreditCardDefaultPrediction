@@ -1,4 +1,4 @@
-training_pipeline_config:
+training_pipeline_config: 
   pipeline_name: creditcarddefault
   artifact_dir: artifact
 
