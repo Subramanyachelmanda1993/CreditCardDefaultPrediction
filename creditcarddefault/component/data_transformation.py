@@ -81,7 +81,7 @@ class FeatureGenerator(BaseEstimator, TransformerMixin):
 
             return generated_feature
         except Exception as e:
-            raise HousingException(e, sys) from e
+            raise CreditCardDefaultException(e, sys) from e
 
 
 class DataTransformation:
@@ -97,7 +97,7 @@ class DataTransformation:
             self.data_validation_artifact = data_validation_artifact
 
         except Exception as e:
-            raise HousingException(e,sys) from e
+            raise CreditCardDefaultException(e,sys) from e
 
     
 
@@ -139,7 +139,7 @@ class DataTransformation:
             return preprocessing
 
         except Exception as e:
-            raise HousingException(e,sys) from e   
+            raise CreditCardDefaultException(e,sys) from e   
 
 
     def initiate_data_transformation(self)->DataTransformationArtifact:
@@ -211,7 +211,7 @@ class DataTransformation:
             logging.info(f"Data transformationa artifact: {data_transformation_artifact}")
             return data_transformation_artifact
         except Exception as e:
-            raise HousingException(e,sys) from e
+            raise CreditCardDefaultException(e,sys) from e
 
     def __del__(self):
         logging.info(f"{'>>'*30}Data Transformation log completed.{'<<'*30} \n\n")

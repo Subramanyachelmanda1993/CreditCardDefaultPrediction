@@ -71,7 +71,7 @@ class Pipeline(Thread):
             )
             return data_transformation.initiate_data_transformation()
         except Exception as e:
-            raise CreditCardDefaultException(e, sys)
+            raise CreditCardDefaultException(e, sys) from e
 
     def start_model_trainer(self, data_transformation_artifact: DataTransformationArtifact) -> ModelTrainerArtifact:
         try:
