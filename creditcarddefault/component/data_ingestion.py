@@ -55,7 +55,7 @@ class DataIngestion:
 
             os.makedirs(raw_data_dir,exist_ok=True)
 
-            logging.info(f"Extracting tgz file: [{csv_file_path}] into dir: [{raw_data_dir}]")
+            logging.info(f"Extracting csv file: [{csv_file_path}] into dir: [{raw_data_dir}]")
             with open(csv_file_path) as creditcarddefault_file:
                 csv.reader(creditcarddefault_file)
                 shutil.copy(csv_file_path, raw_data_dir)
@@ -128,7 +128,7 @@ class DataIngestion:
     
     def initiate_data_ingestion(self)-> DataIngestionArtifact:
         try:
-            tgz_file_path = self.download_creditcarddefault_data()
+            csv_file_path = self.download_creditcarddefault_data()
             self.read_csv_file(csv_file_path=csv_file_path)
             return self.split_data_as_train_test()
         except Exception as e:
