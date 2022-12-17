@@ -4,8 +4,7 @@ from creditcarddefault.entity.config_entity import ModelEvaluationConfig
 from creditcarddefault.entity.artifact_entity import DataIngestionArtifact,DataValidationArtifact,ModelTrainerArtifact,ModelEvaluationArtifact
 from creditcarddefault.constant import *
 import numpy as np
-import os
-import sys
+import os, sys
 from creditcarddefault.util.util import write_yaml_file, read_yaml_file, load_object,load_data
 from creditcarddefault.entity import *
 
