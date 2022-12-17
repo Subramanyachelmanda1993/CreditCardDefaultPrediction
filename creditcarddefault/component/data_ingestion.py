@@ -28,23 +28,21 @@ class DataIngestion:
             
             #folder location to download file
             csv_download_dir = self.data_ingestion_config.csv_download_dir
-           
+                       
             if os.path.exists(csv_download_dir):
                 os.remove(csv_download_dir)
             
             os.makedirs(csv_download_dir, exist_ok=True)
-
+            
             creditcarddefault_file_name = os.path.basename(download_url)
 
             csv_file_path = os.path.join(csv_download_dir, creditcarddefault_file_name)
-            
+                        
             logging.info(f"Downloading file from :[{download_url}] into :[{csv_file_path}]")
             urllib.request.urlretrieve(download_url, csv_file_path)
             logging.info(f"File :[{csv_file_path}] has been downloaded successfully.")
             return csv_file_path
-            with open(csv_file_path) as csv_file:
-                csv.reader(csv_file)
-
+            
         except Exception as e:
             raise CreditCardDefaultException(e,sys) from e
 
@@ -58,9 +56,9 @@ class DataIngestion:
             os.makedirs(raw_data_dir,exist_ok=True)
 
             logging.info(f"Extracting csv file: [{csv_file_path}] into dir: [{raw_data_dir}]")
-            with open(csv_file_path) as creditcarddefault_file:
-                csv.reader(creditcarddefault_file)
-                shutil.copy(csv_file_path, raw_data_dir)
+            with open(csv_file_path, 'r') as csv_file:
+              creditcarddefault_file = csv.reader(csv_file)
+            shutil.copy(csv_file_path, raw_data_dir)
             
                 # creditcarddefault_tgz_file_obj.close()
             logging.info(f"Extraction completed")
