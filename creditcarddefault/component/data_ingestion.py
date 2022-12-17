@@ -39,7 +39,7 @@ class DataIngestion:
             tgz_file_path = os.path.join(tgz_download_dir, creditcarddefault_file_name)
                         
             logging.info(f"Downloading file from :[{download_url}] into :[{tgz_file_path }]")
-            urllib.request.urlretrieve(download_url, tgz_file_path )
+            urllib.request.urlretrieve(download_url, tgz_file_path)
             logging.info(f"File :[{tgz_file_path}] has been downloaded successfully.")
             return tgz_file_path 
             
