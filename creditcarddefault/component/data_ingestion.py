@@ -4,7 +4,7 @@ from creditcarddefault.exception import CreditCardDefaultException
 from creditcarddefault.logger import logging
 from creditcarddefault.entity.artifact_entity import DataIngestionArtifact
 import tarfile
-import openpyxl
+import csv
 import shutil
 import numpy as np
 from six.moves import urllib
@@ -27,26 +27,26 @@ class DataIngestion:
             download_url = self.data_ingestion_config.dataset_download_url
 
             #folder location to download file
-            tgz_download_dir = self.data_ingestion_config.tgz_download_dir
+            csv_download_dir = self.data_ingestion_config.csv_download_dir
 
-            if os.path.exists(tgz_download_dir):
-                os.remove(tgz_download_dir)
+            if os.path.exists(csv_download_dir):
+                os.remove(csv_download_dir)
             
-            os.makedirs(tgz_download_dir, exist_ok=True)
+            os.makedirs(csv_download_dir, exist_ok=True)
 
             creditcarddefault_file_name = os.path.basename(download_url)
 
-            tgz_file_path = os.path.join(tgz_download_dir, creditcarddefault_file_name)
+            csv_file_path = os.path.join(csv_download_dir, creditcarddefault_file_name)
 
-            logging.info(f"Downloading file from :[{download_url}] into :[{tgz_file_path}]")
-            urllib.request.urlretrieve(download_url, tgz_file_path)
-            logging.info(f"File :[{tgz_file_path}] has been downloaded successfully.")
-            return tgz_file_path
+            logging.info(f"Downloading file from :[{download_url}] into :[{csv_file_path}]")
+            urllib.request.urlretrieve(download_url, csv_file_path)
+            logging.info(f"File :[{csv_file_path}] has been downloaded successfully.")
+            return csv_file_path
 
         except Exception as e:
             raise CreditCardDefaultException(e,sys) from e
 
-    def extract_tgz_file(self, tgz_file_path:str):
+    def read_csv_file(self, csv_file_path:str):
         try:
             raw_data_dir = self.data_ingestion_config.raw_data_dir
 
@@ -55,10 +55,12 @@ class DataIngestion:
 
             os.makedirs(raw_data_dir,exist_ok=True)
 
-            logging.info(f"Extracting tgz file: [{tgz_file_path}] into dir: [{raw_data_dir}]")
-            with tarfile.open(tgz_file_path) as creditcarddefault_tgz_file_obj:
-                creditcarddefault_tgz_file_obj.extractall(path=raw_data_dir)
-                creditcarddefault_tgz_file_obj.close()
+            logging.info(f"Extracting tgz file: [{csv_file_path}] into dir: [{raw_data_dir}]")
+            with open(csv_file_path) as creditcarddefault_file:
+                csv.reader(creditcarddefault_file)
+                shutil.copy(csv_file_path, raw_data_dir)
+            
+                # creditcarddefault_tgz_file_obj.close()
             logging.info(f"Extraction completed")
   
         except Exception as e:
@@ -127,7 +129,7 @@ class DataIngestion:
     def initiate_data_ingestion(self)-> DataIngestionArtifact:
         try:
             tgz_file_path = self.download_creditcarddefault_data()
-            self.extract_tgz_file(tgz_file_path=tgz_file_path)
+            self.read_csv_file(csv_file_path=csv_file_path)
             return self.split_data_as_train_test()
         except Exception as e:
             raise CreditCardDefaultException(e,sys) from e
