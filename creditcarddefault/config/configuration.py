@@ -6,8 +6,6 @@ from creditcarddefault.constant import *
 from creditcarddefault.exception import CreditCardDefaultException
 
 
-
-
 class Configuration:
 
     def __init__(self,
