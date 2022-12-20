@@ -5,7 +5,7 @@ from creditcarddefault.util.util import load_object
 import pandas as pd
 
 
-class HousingData:
+class CreditCardDefaultData:
 
     def __init__(self,
                  ID: int,
@@ -32,7 +32,7 @@ class HousingData:
                  PAY_AMT4: float,
                  PAY_AMT5: float,
                  PAY_AMT6: float,
-                default_payment_next_month : int = None
+                 default_payment_next_month : int = None
                 ):
         try:
             self.ID = ID
@@ -124,8 +124,8 @@ class creditCardDefaultPredictor:
         try:
             model_path = self.get_latest_model_path()
             model = load_object(file_path=model_path)
-            median_house_value = model.predict(X)
-            return median_house_value
+            default.payment.next.month = model.predict(X)
+            return default.payment.next.month
         except Exception as e:
             raise CreditCardDefaultException(e, sys) from e
         
