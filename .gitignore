@@ -5,6 +5,8 @@ __pycache__/
 
 # C extensions
 *.so
+creditcarddefault/artifact
+saved_models
 
 # Distribution / packaging
 .Python

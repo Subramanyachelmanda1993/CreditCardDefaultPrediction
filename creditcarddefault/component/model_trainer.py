@@ -5,8 +5,8 @@ from typing import List
 from creditcarddefault.entity.artifact_entity import DataTransformationArtifact, ModelTrainerArtifact
 from creditcarddefault.entity.config_entity import ModelTrainerConfig
 from creditcarddefault.util.util import load_numpy_array_data,save_object,load_object
-# from creditcarddefault.entity.model_factory import MetricInfoArtifact, ModelFactory,GridSearchedBestModel
-# from creditcarddefault.entity.model_factory import evaluate_regression_model
+from creditcarddefault.entity.model_factory import MetricInfoArtifact, ModelFactory,GridSearchedBestModel
+from creditcarddefault.entity.model_factory import evaluate_regression_model
 
 
 
