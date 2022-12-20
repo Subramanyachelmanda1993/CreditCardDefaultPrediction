@@ -108,7 +108,7 @@ class DataTransformation:
             dataset_schema = read_yaml_file(file_path=schema_file_path)
 
             numerical_columns = dataset_schema[NUMERICAL_COLUMN_KEY]
-            categorical_columns = dataset_schema[CATEGORICAL_COLUMN_KEY]
+            # categorical_columns = dataset_schema[CATEGORICAL_COLUMN_KEY]
 
 
             num_pipeline = Pipeline(steps=[
