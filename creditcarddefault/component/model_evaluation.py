@@ -23,7 +23,7 @@ class ModelEvaluation:
             self.data_ingestion_artifact = data_ingestion_artifact
             self.data_validation_artifact = data_validation_artifact
         except Exception as e:
-            raise HousingException(e, sys) from e
+            raise CreditCardDefaultException(e, sys) from e
 
     def get_best_model(self):
         try:
@@ -44,7 +44,7 @@ class ModelEvaluation:
             model = load_object(file_path=model_eval_file_content[BEST_MODEL_KEY][MODEL_PATH_KEY])
             return model
         except Exception as e:
-            raise HousingException(e, sys) from e
+            raise CreditCardDefaultException(e, sys) from e
 
     def update_evaluation_report(self, model_evaluation_artifact: ModelEvaluationArtifact):
         try:
@@ -77,7 +77,7 @@ class ModelEvaluation:
             write_yaml_file(file_path=eval_file_path, data=model_eval_content)
 
         except Exception as e:
-            raise HousingException(e, sys) from e
+            raise CreditCardDefaultException(e, sys) from e
 
     def initiate_model_evaluation(self) -> ModelEvaluationArtifact:
         try:
@@ -150,7 +150,7 @@ class ModelEvaluation:
                                                                     is_model_accepted=False)
             return model_evaluation_artifact
         except Exception as e:
-            raise HousingException(e, sys) from e
+            raise CreditCardDefaultException(e, sys) from e
 
     def __del__(self):
         logging.info(f"{'=' * 20}Model Evaluation log completed.{'=' * 20} ")
