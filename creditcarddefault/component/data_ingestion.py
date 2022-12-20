@@ -80,11 +80,11 @@ class DataIngestion:
             logging.info(f"Reading csv file: [{creditcarddefault_file_path}]")
             creditcarddefault_data_frame = pd.read_csv(creditcarddefault_file_path)
             
-            # creditcarddefault_data_frame["income_cat"] = pd.cut(
-            #     housing_data_frame["median_income"],
-            #     bins=[0.0, 1.5, 3.0, 4.5, 6.0, np.inf],
-            #     labels=[1,2,3,4,5]
-            # )
+            creditcarddefault_data_frame["MEDIAN_BAL"] = pd.cut(
+                creditcarddefault_data_frame["LIMIT_BAL"],
+                bins=[0.0, 1.5, 3.0, 4.5, 6.0, np.inf],
+                labels=[1,2,3,4,5]
+            )
             
 
             logging.info(f"Splitting data into train and test")
@@ -93,9 +93,9 @@ class DataIngestion:
 
             split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
 
-            for train_index,test_index in split.split(creditcarddefault_data_frame, creditcarddefault_data_frame["default.payment.next.month"]):
-                strat_train_set =  creditcarddefault_data_frame.loc[train_index].drop(["default.payment.next.month"], axis=1)
-                strat_test_set =  creditcarddefault_data_frame.loc[test_index].drop(["default.payment.next.month"], axis=1)
+            for train_index,test_index in split.split(creditcarddefault_data_frame, creditcarddefault_data_frame["MEDIAN_BAL"]):
+                strat_train_set =  creditcarddefault_data_frame.loc[train_index].drop(["MEDIAN_BAL"], axis=1)
+                strat_test_set =  creditcarddefault_data_frame.loc[test_index].drop(["MEDIAN_BAL"], axis=1)
 
             train_file_path = os.path.join(self.data_ingestion_config.ingested_train_dir,
                                             file_name)
