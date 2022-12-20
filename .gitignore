@@ -31,6 +31,7 @@ MANIFEST
 creditcarddefaultprediction/
 notebook/
 demo.py
+creditcarddefault_logs/
 
 
 # PyInstaller
