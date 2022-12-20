@@ -63,7 +63,7 @@ class CreditCardDefaultData:
         except Exception as e:
             raise CreditCardDefaultException(e, sys) from e
 
-    def get_housing_input_data_frame(self):
+    def get_creditcarddefault_input_data_frame(self):
 
         try:
             creditcarddefault_input_dict = self.get_creditcarddefault_data_as_dict()

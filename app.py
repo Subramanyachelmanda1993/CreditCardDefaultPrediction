@@ -1,22 +1,22 @@
 from flask import Flask, request
 
 import pip
-from housing.util.util import read_yaml_file, write_yaml_file
+from creditcarddefault.util.util import read_yaml_file, write_yaml_file
 from matplotlib.style import context
-from housing.logger import logging
-from housing.exception import HousingException
+from creditcarddefault.logger import logging
+from creditcarddefault.exception import CreditCardDefaultException
 import os, sys
 import json
-from housing.config.configuration import Configuartion
-from housing.constant import CONFIG_DIR, get_current_time_stamp
-from housing.pipeline.pipeline import Pipeline
-from housing.entity.housing_predictor import HousingPredictor, HousingData
+from creditcarddefault.config.configuration import Configuration
+from creditcarddefault.constant import CONFIG_DIR, get_current_time_stamp
+from creditcarddefault.pipeline.pipeline import Pipeline
+from creditcarddefault.entity.creditcarddefault_predictor import creditCardDefaultPredictor, CreditCardDefaultData
 from flask import send_file, abort, render_template
 
 
 ROOT_DIR = os.getcwd()
 LOG_FOLDER_NAME = "logs"
-PIPELINE_FOLDER_NAME = "housing"
+PIPELINE_FOLDER_NAME = "creditcarddefault"
 SAVED_MODELS_DIR_NAME = "saved_models"
 MODEL_CONFIG_FILE_PATH = os.path.join(ROOT_DIR, CONFIG_DIR, "model.yaml")
 LOG_DIR = os.path.join(ROOT_DIR, LOG_FOLDER_NAME)
@@ -24,15 +24,15 @@ PIPELINE_DIR = os.path.join(ROOT_DIR, PIPELINE_FOLDER_NAME)
 MODEL_DIR = os.path.join(ROOT_DIR, SAVED_MODELS_DIR_NAME)
 
 
-from housing.logger import get_log_dataframe
+from creditcarddefault.logger import get_log_dataframe
 
-HOUSING_DATA_KEY = "housing_data"
-MEDIAN_HOUSING_VALUE_KEY = "median_house_value"
+CREDITCARDDEFAULT_DATA_KEY = "creditcarddefault_data"
+DEFAULT_PAYMENT_NEXT_MONTH_VALUE_KEY = "default_payment_next_month"
 
 app = Flask(__name__)
 
 
-@app.route('/artifact', defaults={'req_path': 'housing'})
+@app.route('/artifact', defaults={'req_path': 'creditcarddefault'})
 @app.route('/artifact/<path:req_path>')
 def render_artifact_dir(req_path):
     os.makedirs("housing", exist_ok=True)
@@ -102,37 +102,68 @@ def train():
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
     context = {
-        HOUSING_DATA_KEY: None,
-        MEDIAN_HOUSING_VALUE_KEY: None
+        CREDITCARDDEFAULT_DATA_KEY: None,
+        DEFAULT_PAYMENT_NEXT_MONTH_VALUE_KEY: None
     }
 
     if request.method == 'POST':
-        longitude = float(request.form['longitude'])
-        latitude = float(request.form['latitude'])
-        housing_median_age = float(request.form['housing_median_age'])
-        total_rooms = float(request.form['total_rooms'])
-        total_bedrooms = float(request.form['total_bedrooms'])
-        population = float(request.form['population'])
-        households = float(request.form['households'])
-        median_income = float(request.form['median_income'])
-        ocean_proximity = request.form['ocean_proximity']
+        ID = int(request.form['ID'])
+        LIMIT_BAL = float(request.form['LIMIT_BAL'])
+        SEX = int(request.form['SEX'])
+        EDUCATION = int(request.form['EDUCATION'])
+        MARRIAGE = int(request.form['MARRIAGE'])
+        AGE = int(request.form['AGE'])
+        PAY_0 = int(request.form['PAY_0'])
+        PAY_2 = int(request.form['PAY_2'])
+        PAY_3 = int(request.form['PAY_3'])
+        PAY_4 = int(request.form['PAY_4'])
+        PAY_5 = int(request.form['PAY_5'])
+        PAY_6 = int(request.form['PAY_6'])
+        BILL_AMT1 = float(request.form['BILL_AMT1'])
+        BILL_AMT2 = float(request.form['BILL_AMT2'])
+        BILL_AMT3 = float(request.form['BILL_AMT3'])
+        BILL_AMT4 = float(request.form['BILL_AMT4'])
+        BILL_AMT5 = float(request.form['BILL_AMT5'])
+        BILL_AMT6 = float(request.form['BILL_AMT6'])
+        PAY_AMT1 = float(request.form['PAY_AMT1'])
+        PAY_AMT2 = float(request.form['PAY_AMT2'])
+        PAY_AMT3 = float(request.form['PAY_AMT3'])
+        PAY_AMT4 = float(request.form['PAY_AMT4'])
+        PAY_AMT5 = float(request.form['PAY_AMT5'])
+        PAY_AMT6 = float(request.form['PAY_AMT6'])
 
-        housing_data = HousingData(longitude=longitude,
-                                   latitude=latitude,
+        creditcarddefault = CreditCardDefaultData( ID=ID ,
+                                   LIMIT_BAL=LIMIT_BAL,
                                    housing_median_age=housing_median_age,
-                                   total_rooms=total_rooms,
-                                   total_bedrooms=total_bedrooms,
-                                   population=population,
-                                   households=households,
-                                   median_income=median_income,
-                                   ocean_proximity=ocean_proximity,
+                                   SEX=SEX,
+                                   EDUCATION=EDUCATION,
+                                   MARRIAGE=MARRIAGE,
+                                   AGE=AGE,
+                                   PAY_0=PAY_0,
+                                   PAY_2=PAY_2,
+                                   PAY_3=PAY_3,
+                                   PAY_4=PAY_4,
+                                   PAY_5=PAY_5,
+                                   PAY_6=PAY_6,
+                                   BILL_AMT1=BILL_AMT1,
+                                   BILL_AMT2=BILL_AMT2,
+                                   BILL_AMT3=BILL_AMT3,
+                                   BILL_AMT4=BILL_AMT4,
+                                   BILL_AMT5=BILL_AMT5,
+                                   BILL_AMT6=BILL_AMT6,
+                                   PAY_AMT1=PAY_AMT1,
+                                   PAY_AMT2=PAY_AMT2,
+                                   PAY_AMT3=PAY_AMT3,
+                                   PAY_AMT4=PAY_AMT4,
+                                   PAY_AMT5=PAY_AMT5,
+                                   PAY_AMT6=PAY_AMT6,
                                    )
-        housing_df = housing_data.get_housing_input_data_frame()
-        housing_predictor = HousingPredictor(model_dir=MODEL_DIR)
-        median_housing_value = housing_predictor.predict(X=housing_df)
+        creditcarddefault_df = creditcarddefault_data.get_creditcarddefault_input_data_frame()
+        creditcarddefault_predictor = creditCardDefaultPredictor(model_dir=MODEL_DIR)
+        default_payment_next_month = creditcarddefault_predictor.predict(X=creditcarddefault_df)
         context = {
-            HOUSING_DATA_KEY: housing_data.get_housing_data_as_dict(),
-            MEDIAN_HOUSING_VALUE_KEY: median_housing_value,
+            CREDITCARDDEFAULT_DATA_KEY: creditcarddefault_data.get_creditcarddefault_data_as_dict(),
+            DEFAULT_PAYMENT_NEXT_MONTH_VALUE_KEY: default_payment_next_month,
         }
         return render_template('predict.html', context=context)
     return render_template("predict.html", context=context)
