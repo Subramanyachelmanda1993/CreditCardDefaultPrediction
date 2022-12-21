@@ -50,12 +50,12 @@ numerical_columns:
   - PAY_AMT4
   - PAY_AMT5
   - PAY_AMT6
-  - default_payment_next_month
+  - default.payment.next.month
 
 # categorical_columns:
 #   - ocean_proximity
 
-target_column: default_payment_next_month
+target_column: default.payment.next.month
 
 # domain_value:
 #   ocean_proximity:

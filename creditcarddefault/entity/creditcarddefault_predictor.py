@@ -32,7 +32,7 @@ class CreditCardDefaultData:
                  PAY_AMT4: float,
                  PAY_AMT5: float,
                  PAY_AMT6: float,
-                 default_payment_next_month : int = None
+                 default_payment_next_month : int = None 
                 ):
         try:
             self.ID = ID
